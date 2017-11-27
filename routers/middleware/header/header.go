@@ -3,7 +3,7 @@ package header
 import (
 	"net/http"
 	"time"
-	"veda/util/version"
+	"github.com/hawkingrei/redp/internal/version"
 
 	"github.com/gin-gonic/gin"
 )
