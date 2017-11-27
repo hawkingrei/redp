@@ -16,6 +16,10 @@
 			"Rev": "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae"
 		},
 		{
+			"ImportPath": "github.com/gin-gonic/contrib/ginrus",
+			"Rev": "8f08bc9b92a9734916abda03656c5f1b99ad10be"
+		},
+		{
 			"ImportPath": "github.com/gin-gonic/gin",
 			"Comment": "v1.2-129-geeb5784",
 			"Rev": "eeb57848cac06c360a3c262837394051018b8f66"
@@ -64,12 +68,33 @@
 			"Rev": "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
 		},
 		{
+			"ImportPath": "github.com/sirupsen/logrus",
+			"Comment": "v1.0.3-19-g95cd2b9",
+			"Rev": "95cd2b9c79aa5e72ab0bc69b7ccc2be15bf850f6"
+		},
+		{
 			"ImportPath": "github.com/ugorji/go/codec",
 			"Rev": "84cb69a8af8316eed8cf4a3c9368a56977850062"
 		},
 		{
+			"ImportPath": "golang.org/x/crypto/ssh/terminal",
+			"Rev": "b080dc9a8c480b08e698fb1219160d598526310f"
+		},
+		{
+			"ImportPath": "golang.org/x/net/context",
+			"Rev": "513929065c19401a1c7b76ecd942f9f86a0c061b"
+		},
+		{
+			"ImportPath": "golang.org/x/sync/errgroup",
+			"Rev": "fd80eb99c8f653c847d294a001bdf2a3a6f768f5"
+		},
+		{
 			"ImportPath": "golang.org/x/sys/unix",
-			"Rev": "90796e5a05ce440b41c768bd9af257005e470461"
+			"Rev": "4ff8c001ce4cc464e644b922325097228fce14d8"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/windows",
+			"Rev": "4ff8c001ce4cc464e644b922325097228fce14d8"
 		},
 		{
 			"ImportPath": "gopkg.in/go-playground/validator.v8",

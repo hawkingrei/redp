@@ -18,4 +18,5 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 		hongbao.GET("/:pid")
 		hongbao.POST("/:pid")
 	}
+	return e
 }

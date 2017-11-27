@@ -40,6 +40,8 @@ $(APPS): %: $(BLDDIR)/%
 clean:
 	@rm -fr $(BLDDIR)
 
+vendor:
+	@gofmt -w -r '"github.com/Sirupsen/logrus" -> "github.com/sirupsen/logrus"' $(shell find vendor -name \*.go -type f -print)
 check:
 	@echo "gofmt (simplify)"
 	@gofmt -s -l -w $(FILES) 2>&1 | awk '{print} END{if(NR>0) {exit 1}}'

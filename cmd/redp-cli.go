@@ -3,12 +3,30 @@ package main
 import (
 	"flag"
 	"fmt"
+	"net/http"
 	"os"
+	"time"
+
+	"golang.org/x/sync/errgroup"
 
 	"github.com/BurntSushi/toml"
+	"github.com/gin-gonic/contrib/ginrus"
 	"github.com/hawkingrei/redp/conf"
 	"github.com/hawkingrei/redp/internal/version"
+	"github.com/hawkingrei/redp/routers"
+	"github.com/hawkingrei/redp/routers/middleware"
+	"github.com/hawkingrei/redp/store"
+	"github.com/sirupsen/logrus"
 )
+
+func setupStore(c *conf.Configure) (store.Store, error) {
+	store, err := store.New(
+		c.DbDriver,
+		c.DbURL,
+	)
+	return store, err
+
+}
 
 func redpFlagSet() *flag.FlagSet {
 	flagSet := flag.NewFlagSet("redp", flag.ExitOnError)
@@ -17,7 +35,7 @@ func redpFlagSet() *flag.FlagSet {
 	return flagSet
 }
 
-func loadmeta(configFile string) (meta conf.Configure, err error) {
+func loadmeta(configFile string) (meta *conf.Configure, err error) {
 	if configFile != "" {
 		_, err = toml.DecodeFile(configFile, &meta)
 		if err != nil {
@@ -35,5 +53,33 @@ func main() {
 		fmt.Println(version.String())
 		os.Exit(0)
 	}
+	configFile := flagSet.Lookup("config").Value.String()
+	config, err := loadmeta(configFile)
 
+	if config.Debug {
+		logrus.SetLevel(logrus.DebugLevel)
+	} else {
+		logrus.SetLevel(logrus.WarnLevel)
+	}
+
+	store_, err := setupStore(config)
+	if err != nil {
+		logrus.Error(err.Error())
+		os.Exit(0)
+	}
+	handler := routers.Load(
+		ginrus.Ginrus(logrus.StandardLogger(), time.RFC3339, true),
+		middleware.Version,
+		middleware.Store(config, store_),
+	)
+
+	var g errgroup.Group
+	g.Go(func() error {
+		serve := &http.Server{
+			Addr:    ":9000",
+			Handler: handler,
+		}
+		return serve.ListenAndServe()
+	})
+	g.Wait()
 }
