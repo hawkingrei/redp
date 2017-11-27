@@ -1,0 +1,88 @@
+{
+	"ImportPath": "github.com/hawkingrei/redp",
+	"GoVersion": "go1.9",
+	"GodepVersion": "v79",
+	"Packages": [
+		"./..."
+	],
+	"Deps": [
+		{
+			"ImportPath": "github.com/BurntSushi/toml",
+			"Comment": "v0.3.0-7-ga368813",
+			"Rev": "a368813c5e648fee92e5f6c30e3944ff9d5e8895"
+		},
+		{
+			"ImportPath": "github.com/gin-contrib/sse",
+			"Rev": "22d885f9ecc78bf4ee5d72b937e4bbcdc58e8cae"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin",
+			"Comment": "v1.2-129-geeb5784",
+			"Rev": "eeb57848cac06c360a3c262837394051018b8f66"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/binding",
+			"Comment": "v1.2-129-geeb5784",
+			"Rev": "eeb57848cac06c360a3c262837394051018b8f66"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/json",
+			"Comment": "v1.2-129-geeb5784",
+			"Rev": "eeb57848cac06c360a3c262837394051018b8f66"
+		},
+		{
+			"ImportPath": "github.com/gin-gonic/gin/render",
+			"Comment": "v1.2-129-geeb5784",
+			"Rev": "eeb57848cac06c360a3c262837394051018b8f66"
+		},
+		{
+			"ImportPath": "github.com/go-xorm/builder",
+			"Rev": "a4a881a4e552fcb5473f39e8b9f7d9f3457a7fb0"
+		},
+		{
+			"ImportPath": "github.com/go-xorm/core",
+			"Comment": "v0.5.7-2-g7ba98d2",
+			"Rev": "7ba98d23bc4218169d31ab64e93313edb5a5fb27"
+		},
+		{
+			"ImportPath": "github.com/go-xorm/xorm",
+			"Comment": "v0.6.3-32-ga6cc098",
+			"Rev": "a6cc0986897283170a53411cf6f40ae88a433ce2"
+		},
+		{
+			"ImportPath": "github.com/golang/protobuf/proto",
+			"Rev": "1e59b77b52bf8e4b449a57e6f79f21226d571845"
+		},
+		{
+			"ImportPath": "github.com/json-iterator/go",
+			"Comment": "1.0.0-1-gd80309a",
+			"Rev": "d80309af3bfd0b084e88c732056a4118f94e49f8"
+		},
+		{
+			"ImportPath": "github.com/mattn/go-isatty",
+			"Comment": "v0.0.3-7-g6ca4dbf",
+			"Rev": "6ca4dbf54d38eea1a992b3c722a76a5d1c4cb25c"
+		},
+		{
+			"ImportPath": "github.com/ugorji/go/codec",
+			"Rev": "84cb69a8af8316eed8cf4a3c9368a56977850062"
+		},
+		{
+			"ImportPath": "golang.org/x/sys/unix",
+			"Rev": "90796e5a05ce440b41c768bd9af257005e470461"
+		},
+		{
+			"ImportPath": "gopkg.in/go-playground/validator.v8",
+			"Comment": "v8.18.2",
+			"Rev": "5f1438d3fca68893a817e4a66806cea46a9e4ebf"
+		},
+		{
+			"ImportPath": "gopkg.in/yaml.v2",
+			"Rev": "287cf08546ab5e7e37d55a84f7ed3fd1db036de5"
+		},
+		{
+			"ImportPath": "veda/util/version",
+			"Rev": "d0f97749084c525de6a938ab1641a07d537d1deb"
+		}
+	]
+}
