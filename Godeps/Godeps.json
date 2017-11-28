@@ -40,6 +40,11 @@
 			"Rev": "eeb57848cac06c360a3c262837394051018b8f66"
 		},
 		{
+			"ImportPath": "github.com/go-sql-driver/mysql",
+			"Comment": "v1.3-49-gcd4cb90",
+			"Rev": "cd4cb909ce1a31435164be29bf3682031f61539a"
+		},
+		{
 			"ImportPath": "github.com/go-xorm/builder",
 			"Rev": "a4a881a4e552fcb5473f39e8b9f7d9f3457a7fb0"
 		},
