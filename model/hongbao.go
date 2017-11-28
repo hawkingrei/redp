@@ -13,10 +13,14 @@ func CreateHongbao(c *gin.Context) {
 
 }
 
-func GetHongbao(c *gin.Context) {
+func GetAllHongbaoInfo(c *gin.Context) {
 
 }
 
 func ListHongbao(c *gin.Context) {
+
+}
+
+func GrabHongbao(c *gin.Context) {
 
 }
