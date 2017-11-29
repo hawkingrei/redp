@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 	"os"
+	"os/signal"
 	"time"
 
 	"golang.org/x/sync/errgroup"
@@ -25,7 +26,6 @@ func setupStore(c *conf.Configure) (store.Store, error) {
 		c.DbURL,
 	)
 	return store, err
-
 }
 
 func redpFlagSet() *flag.FlagSet {
@@ -74,12 +74,21 @@ func main() {
 	)
 
 	var g errgroup.Group
+	quit := make(chan os.Signal)
+	signal.Notify(quit, os.Interrupt)
+	serve := &http.Server{
+		Addr:    ":9000",
+		Handler: handler,
+	}
+
 	g.Go(func() error {
-		serve := &http.Server{
-			Addr:    ":9000",
-			Handler: handler,
-		}
 		return serve.ListenAndServe()
+	})
+	g.Go(func() error {
+		<-quit
+		logrus.Info("receive interrupt signal")
+		store_.Close()
+		return serve.Close()
 	})
 	g.Wait()
 }

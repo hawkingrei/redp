@@ -7,6 +7,7 @@ import (
 )
 
 type Store interface {
+	Close()
 }
 
 type datastore struct {
@@ -19,4 +20,8 @@ func New(driver, url string) (Store, error) {
 		return datastore{}, err
 	}
 	return datastore{Db: db}, err
+}
+
+func (ds datastore) Close() {
+	ds.Db.Close()
 }
