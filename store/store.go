@@ -2,21 +2,21 @@ package store
 
 import (
 	_ "github.com/go-sql-driver/mysql"
-	"github.com/go-xorm/xorm"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Store interface {
 }
 
 type datastore struct {
-	Db *xorm.Engine
+	Db *gorm.DB
 }
 
 func New(driver, url string) (Store, error) {
-	db, err := xorm.NewEngine(driver, url)
+	db, err := gorm.Open(driver, url)
 	if err != nil {
 		return datastore{}, err
 	}
 	return datastore{Db: db}, err
-
 }
