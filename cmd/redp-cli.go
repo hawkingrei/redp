@@ -14,6 +14,7 @@ import (
 	"github.com/gin-gonic/contrib/ginrus"
 	"github.com/hawkingrei/redp/conf"
 	"github.com/hawkingrei/redp/internal/version"
+	"github.com/hawkingrei/redp/model"
 	"github.com/hawkingrei/redp/routers"
 	"github.com/hawkingrei/redp/routers/middleware"
 	"github.com/hawkingrei/redp/store"
@@ -63,6 +64,7 @@ func main() {
 	}
 
 	store_, err := setupStore(config)
+	store_.CreateTable(&model.User{})
 	if err != nil {
 		logrus.Error(err.Error())
 		os.Exit(0)
