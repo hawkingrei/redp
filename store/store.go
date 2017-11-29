@@ -2,6 +2,7 @@ package store
 
 import (
 	_ "github.com/go-sql-driver/mysql"
+	"github.com/hawkingrei/redp/model"
 
 	"github.com/jinzhu/gorm"
 )
@@ -16,6 +17,9 @@ type datastore struct {
 
 func New(driver, url string) (Store, error) {
 	db, err := gorm.Open(driver, url)
+	if !db.HasTable(&model.User{}) {
+		db.CreateTable(&model.User{})
+	}
 	if err != nil {
 		return datastore{}, err
 	}
