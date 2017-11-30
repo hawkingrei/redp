@@ -1,29 +1,14 @@
 package model
 
 import (
-	"github.com/gin-gonic/gin"
+	"time"
 )
 
 type Hongbao struct {
-	Hbid  int64
-	Uid   int64
-	Money float32
-	Num   int
-	Type  int // 0: sended redp 1： got redp
-}
-
-func CreateHongbao(c *gin.Context) {
-
-}
-
-func GetAllHongbaoInfo(c *gin.Context) {
-
-}
-
-func ListHongbao(c *gin.Context) {
-
-}
-
-func GrabHongbao(c *gin.Context) {
-
+	Hbid       int64 `gorm:"AUTO_INCREMENT;primary_key"`
+	Uid        int64
+	Money      float32
+	Num        int
+	Type       int // 0: sended redp 1： got redp
+	CreateTime time.Time
 }

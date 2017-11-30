@@ -18,11 +18,12 @@ import (
 	"github.com/hawkingrei/redp/routers"
 	"github.com/hawkingrei/redp/routers/middleware"
 	"github.com/hawkingrei/redp/store"
+	"github.com/hawkingrei/redp/store/datastore"
 	"github.com/sirupsen/logrus"
 )
 
 func setupStore(c *conf.Configure) (store.Store, error) {
-	store, err := store.New(
+	store, err := datastore.New(
 		c.DbDriver,
 		c.DbURL,
 	)
@@ -65,6 +66,7 @@ func main() {
 
 	store_, err := setupStore(config)
 	store_.CreateTable(&model.User{})
+	store_.CreateTable(&model.Hongbao{})
 	if err != nil {
 		logrus.Error(err.Error())
 		os.Exit(0)

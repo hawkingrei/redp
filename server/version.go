@@ -1,4 +1,4 @@
-package model
+package server
 
 import (
 	"github.com/hawkingrei/redp/internal/version"

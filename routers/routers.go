@@ -4,8 +4,8 @@ import (
 	"net/http"
 
 	"github.com/gin-gonic/gin"
-	"github.com/hawkingrei/redp/model"
 	"github.com/hawkingrei/redp/routers/middleware/auth"
+	"github.com/hawkingrei/redp/server"
 )
 
 func Load(middleware ...gin.HandlerFunc) http.Handler {
@@ -16,18 +16,18 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	hongbao := e.Group("/api/hongbao")
 	hongbao.Use(authMiddleware.MiddlewareFunc())
 	{
-		hongbao.GET("", model.GetAllHongbaoInfo)
-		hongbao.POST("", model.CreateHongbao)
-		hongbao.GET("/:pid", model.GrabHongbao)
+		hongbao.GET("", server.GetAllHongbaoInfo)
+		hongbao.POST("", server.CreateHongbao)
+		hongbao.GET("/:pid", server.GrabHongbao)
 	}
 	user := e.Group("/api/user")
 	user.Use(authMiddleware.MiddlewareFunc())
 	{
-		user.GET("/:uid")
+		user.GET("", server.GetUser)
 	}
 	version := e.Group("/api/version")
 	{
-		version.GET("", model.GetVersion)
+		version.GET("", server.GetVersion)
 	}
 	return e
 }

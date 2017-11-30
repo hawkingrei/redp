@@ -9,6 +9,8 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
+	"github.com/hawkingrei/redp/store"
+	"github.com/sirupsen/logrus"
 )
 
 type GinAuthMiddleware struct {
@@ -79,6 +81,10 @@ func (mw *GinAuthMiddleware) middlewareImpl(c *gin.Context) {
 	if !mw.Authorizator(c) {
 		mw.unauthorized(c, http.StatusForbidden, "You don't have permission to access.")
 		return
+	}
+	if !store.HasUser(c, user) {
+		store.CreateUser(c, user)
+		logrus.Info("create user ", user)
 	}
 	c.Next()
 }
