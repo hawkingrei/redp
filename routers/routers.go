@@ -16,7 +16,7 @@ func Load(middleware ...gin.HandlerFunc) http.Handler {
 	hongbao := e.Group("/api/hongbao")
 	hongbao.Use(authMiddleware.MiddlewareFunc())
 	{
-		hongbao.GET("", server.GetAllHongbaoInfo)
+		hongbao.GET("", server.ListGotHongbao)
 		hongbao.POST("", server.CreateSendedHongbao)
 		hongbao.GET("/:pid", server.GrabHongbao)
 	}

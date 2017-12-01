@@ -1,6 +1,7 @@
 package server
 
 import (
+	"fmt"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -35,14 +36,29 @@ func CreateSendedHongbao(c *gin.Context) {
 	c.JSON(200, *hb)
 }
 
-func GetAllHongbaoInfo(c *gin.Context) {
-
-}
-
-func ListHongbao(c *gin.Context) {
-
+func ListGotHongbao(c *gin.Context) {
+	username, _ := c.Get("user")
+	result, err := store.ListGotHongbao(c, username.(string))
+	if err != nil {
+		c.String(500, "Error list got hongbao. %s", err)
+	}
+	c.JSON(200, result)
 }
 
 func GrabHongbao(c *gin.Context) {
-
+	username, _ := c.Get("user")
+	pid := c.Param("pid")
+	hid, err := strconv.ParseInt(pid, 10, 64)
+	fmt.Println(hid)
+	if err != nil {
+		c.JSON(500, "HTTP parm pid is mistake")
+		return
+	}
+	password := c.Request.Header.Get("password")
+	hb, err := store.GrabHongbao(c, hid, username.(string), password)
+	if err != nil {
+		c.String(500, "Error grab hongbao. %s", err)
+		return
+	}
+	c.JSON(200, *hb)
 }

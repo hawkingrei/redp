@@ -36,4 +36,62 @@ func (ds datastore) CreateSendedHongbao(username string, money float32, num int)
 	return &hb, err
 }
 
+func (ds datastore) GrabHongbao(hid int64, username string, password string) (*model.GotHongbao, error) {
+	var shd model.SendedHongbao
+	var ghd model.GotHongbao
+	tx := ds.Db.Begin()
+	err := tx.Where("hbid = ? AND closed = 0", hid).Find(&shd).Error
+	if err != nil {
+		tx.Commit()
+		logrus.Debug("ds GrabHongbao query sened hongbao ", err.Error())
+		return &ghd, err
+	}
+	if password == shd.Password {
+		tx.Commit()
+		return &ghd, errors.New("Password ERROR")
+	}
+	err = tx.Where("hbid = ? And username = ?", hid, username).Find(&ghd).Error
+	if err == nil {
+		tx.Commit()
+		logrus.Debug("ds GrabHongbao username has got hongbao ")
+		return &ghd, err
+	}
+	err = tx.Where("hbid = ? And username = \"\"", hid).First(&ghd).Error
+	if err != nil {
+		tx.Commit()
+		logrus.Debug("ds GrabHongbao get hongbao ", err.Error())
+		return &ghd, err
+	}
+	ghd.Username = username
+	err = tx.Save(&ghd).Error
+	if err != nil {
+		tx.Rollback()
+		logrus.Debug("ds GrabHongbao save got hongbao ", err.Error())
+		return &ghd, err
+	}
+	var myaccount model.User
+	err = tx.Where("username = ?", username).Find(&myaccount).Error
+	if err != nil {
+		tx.Rollback()
+		logrus.Debug("ds GrabHongbao get account ", err.Error())
+		return &ghd, err
+	}
+	myaccount.Memory = myaccount.Memory + ghd.Money
+	err = tx.Save(&myaccount).Error
+	if err != nil {
+		tx.Rollback()
+		logrus.Debug("ds GrabHongbao save account ", err.Error())
+		return &ghd, err
+	}
+	tx.Commit()
+	return &ghd, err
+}
 
+func (ds datastore) ListGotHongbao(username string) ([]model.GotHongbao, error) {
+	var gotHongbaos []model.GotHongbao
+	err := ds.Db.Where(" username = ?", username).Find(&gotHongbaos).Error
+	if err != nil {
+		return gotHongbaos, err
+	}
+	return gotHongbaos, err
+}

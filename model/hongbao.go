@@ -10,6 +10,7 @@ type SendedHongbao struct {
 	Money      float32
 	Num        int
 	Password   string
+	Closed     int "0: open 1: closed"
 	CreateTime time.Time
 }
 
@@ -18,9 +19,4 @@ type GotHongbao struct {
 	Hbid     int64
 	Username string
 	Money    float32
-}
-
-type AllHongbao struct {
-	GotHongbaos   []GotHongbao
-	SendedHongbao []SendedHongbao
 }
