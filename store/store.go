@@ -13,6 +13,8 @@ type Store interface {
 	CreateUser(username string)
 	HasUser(string) bool
 
+	CreateSendedHongbao(username string, money float32, num int) (*model.SendedHongbao, error)
+	//CreateGotHongbao(username string, hid int64) (*model.GotHongbao, error)
 	CreateTable(models ...interface{})
 	Close()
 }
@@ -27,4 +29,8 @@ func CreateUser(c context.Context, username string) {
 
 func HasUser(c context.Context, username string) bool {
 	return FromContext(c).HasUser(username)
+}
+
+func CreateSendedHongbao(c context.Context, username string, money float32, num int) (*model.SendedHongbao, error) {
+	return FromContext(c).CreateSendedHongbao(username, money, num)
 }

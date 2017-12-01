@@ -66,7 +66,8 @@ func main() {
 
 	store_, err := setupStore(config)
 	store_.CreateTable(&model.User{})
-	store_.CreateTable(&model.Hongbao{})
+	store_.CreateTable(&model.SendedHongbao{})
+	store_.CreateTable(&model.GotHongbao{})
 	if err != nil {
 		logrus.Error(err.Error())
 		os.Exit(0)
