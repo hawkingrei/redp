@@ -52,3 +52,5 @@ check:
 	@echo "golint"
 	@ golint ./... 2>&1 | awk '{print} END{if(NR>0) {exit 1}}'
 
+test:
+	@cd internal/hongbao && go test

@@ -2,6 +2,7 @@ package datastore
 
 import (
 	"errors"
+	"fmt"
 	"math/rand"
 	"time"
 
@@ -30,8 +31,10 @@ func (ds datastore) CreateSendedHongbao(username string, money float32, num int)
 	logrus.Debug("ds create SendedHongbao ", hb)
 	for _, v := range hongbaos {
 		gothb := model.GotHongbao{Hbid: hb.Hbid, Money: v}
-		ds.Db.Create(&gothb)
-		logrus.Debug("ds create gotHongbao", gothb)
+		go func() {
+			ds.Db.Create(&gothb)
+			logrus.Debug("ds create gotHongbao", gothb)
+		}()
 	}
 	return &hb, err
 }
@@ -46,7 +49,7 @@ func (ds datastore) GrabHongbao(hid int64, username string, password string) (*m
 		logrus.Debug("ds GrabHongbao query sened hongbao ", err.Error())
 		return &ghd, err
 	}
-	if password == shd.Password {
+	if password != shd.Password {
 		tx.Commit()
 		return &ghd, errors.New("Password ERROR")
 	}
@@ -94,4 +97,58 @@ func (ds datastore) ListGotHongbao(username string) ([]model.GotHongbao, error) 
 		return gotHongbaos, err
 	}
 	return gotHongbaos, err
+}
+
+func (ds datastore) Background(timeout int) {
+	var sendedHongbaos []model.SendedHongbao
+	err := ds.Db.Where(" closed = 0 ").Find(&sendedHongbaos).Error
+	if err != nil {
+		logrus.Error("ds background find opening sendedhongbaos faiil. ", err.Error())
+		return
+	}
+	tx := ds.Db.Begin()
+	for _, v := range sendedHongbaos {
+		logrus.Debug(time.Now().Sub(v.CreateTime))
+		if time.Now().Sub(v.CreateTime) >= (time.Duration(timeout) * time.Second) {
+			var user model.User
+			tx.Where("username = ?", v.Username).Find(&user)
+			if err != nil {
+				tx.Rollback()
+				logrus.Error("ds find user fail. ", err.Error())
+				break
+			}
+			v.Closed = 1
+			err := tx.Save(v).Error
+			if err != nil {
+				tx.Rollback()
+				logrus.Error("ds background close sendedhongbaos faiil. ", err.Error())
+				break
+			}
+			var ungothongbao []model.GotHongbao
+			err = tx.Where("hbid = ? and username = \"\"", v.Hbid).Find(&ungothongbao).Error
+			if err != nil {
+				tx.Rollback()
+				logrus.Error("ds got  closed gothongbaos faiil. ", err.Error())
+				break
+			}
+			fmt.Println(ungothongbao)
+			for _, v := range ungothongbao {
+				user.Memory = user.Memory + v.Money
+			}
+			err = tx.Where("hbid = ? and username = \"\"", v.Hbid).Delete(&model.GotHongbao{}).Error
+			if err != nil {
+				tx.Rollback()
+				logrus.Error("ds got  closed gothongbaos faiil. ", err.Error())
+				break
+			}
+			err = tx.Save(&user).Error
+			if err != nil {
+				tx.Rollback()
+				logrus.Error("ds background update user money faiil. ", err.Error())
+				break
+			}
+		}
+	}
+	tx.Commit()
+	logrus.Debug("ds delete  closed gothongbao succeed!! ")
 }

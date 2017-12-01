@@ -18,6 +18,7 @@ type Store interface {
 	ListGotHongbao(username string) ([]model.GotHongbao, error)
 	//CreateGotHongbao(username string, hid int64) (*model.GotHongbao, error)
 	CreateTable(models ...interface{})
+	Background(timeout int)
 	Close()
 }
 

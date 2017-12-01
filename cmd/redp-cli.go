@@ -65,21 +65,22 @@ func main() {
 	}
 
 	store_, err := setupStore(config)
-	store_.CreateTable(&model.User{})
-	store_.CreateTable(&model.SendedHongbao{})
-	store_.CreateTable(&model.GotHongbao{})
 	if err != nil {
 		logrus.Error(err.Error())
 		os.Exit(0)
 	}
+	store_.CreateTable(&model.User{})
+	store_.CreateTable(&model.SendedHongbao{})
+	store_.CreateTable(&model.GotHongbao{})
+
+	var g errgroup.Group
+	quit := make(chan os.Signal)
 	handler := routers.Load(
 		ginrus.Ginrus(logrus.StandardLogger(), time.RFC3339, true),
 		middleware.Version,
 		middleware.Store(config, store_),
 	)
 
-	var g errgroup.Group
-	quit := make(chan os.Signal)
 	signal.Notify(quit, os.Interrupt)
 	serve := &http.Server{
 		Addr:    ":9000",
@@ -90,10 +91,18 @@ func main() {
 		return serve.ListenAndServe()
 	})
 	g.Go(func() error {
-		<-quit
-		logrus.Info("receive interrupt signal")
-		store_.Close()
-		return serve.Close()
+		ticker := time.NewTicker(time.Duration(1) * time.Second)
+		for {
+			select {
+			case <-quit:
+				logrus.Info("receive interrupt signal")
+				store_.Close()
+				return serve.Close()
+
+			case <-ticker.C:
+				store_.Background(config.HBtimeout)
+			}
+		}
 	})
 	g.Wait()
 }
