@@ -32,7 +32,7 @@ curl -X POST http://127.0.0.1:9000/api/hongbao --header "Signature:wwz:e235ac07a
 
 ## grab hongbao 
 ```shell
-curl http://127.0.0.1:9000/api/hongbao/1 --header "Signature:wz:d0965c07d1a00fcc85d28b8a241ae35a" -v
+curl http://127.0.0.1:9000/api/hongbao/1 --header "Signature:wz:d0965c07d1a00fcc85d28b8a241ae35a" --header "Password:QwSOkYoF" -v
 
 {"Gothbid":1,"Hbid":1,"Username":"wz","Money":0.87}%
 ```
