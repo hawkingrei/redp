@@ -6,4 +6,5 @@ install:
 
 script:
   - godep restore
+  - make test
   - make
