@@ -13,7 +13,7 @@ make
 
 ## query and create account
 	
-Signature:<Username>:MD5(Username)
+Signature:Username:MD5(Username)
 
  ```shell
  curl http://127.0.0.1:9000/api/user --header "Signature:wwz:e235ac07af7a969a52bec0985f6a9f85" -v
