@@ -4,6 +4,7 @@ go:
 services:
   - mysql
 install:
+  - mysql -uroot -e "create database redp"  
   - go get github.com/tools/godep
   - go get github.com/mattn/goveralls
 script:
