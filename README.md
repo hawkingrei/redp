@@ -1,7 +1,7 @@
 # redp
 [![Build Status](https://travis-ci.org/hawkingrei/redp.svg?branch=master)](https://travis-ci.org/hawkingrei/redp)
 [![Go Report Card](https://goreportcard.com/badge/github.com/hawkingrei/redp)](https://goreportcard.com/report/github.com/hawkingrei/redp)
-
+[![Coverage Status](https://coveralls.io/repos/github/hawkingrei/redp/badge.svg?branch=master)](https://coveralls.io/github/hawkingrei/redp?branch=master)
 
 # RUN
 ```shell
