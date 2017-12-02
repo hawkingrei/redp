@@ -2,9 +2,10 @@ package main
 
 import (
 	"net/http"
-	"net/http/httptest"
 	"testing"
 
+	"github.com/WindomZ/testify/assert"
+	"github.com/appleboy/gofight"
 	"github.com/hawkingrei/redp/conf"
 )
 
@@ -17,50 +18,56 @@ func TestSimpleApi(t *testing.T) {
 	store_ := CreateStote(&conf)
 	handler := CreateHttpHandler(store_, &conf)
 
-	w := httptest.NewRecorder()
-	r, _ := http.NewRequest("GET", "/api/version", nil)
-	handler.ServeHTTP(w, r)
-	if r.Response.StatusCode != 200 {
-		t.Error("GET /api/version not 200")
-	}
+	r := gofight.New()
+	r.GET("/api/version").
+		SetDebug(true).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.Equal(t, http.StatusOK, r.Code)
+		})
 
-	w = httptest.NewRecorder()
-	r, _ = http.NewRequest("GET", "/api/user", nil)
-	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241ae35a")
-	handler.ServeHTTP(w, r)
-	if r.Response.StatusCode != 200 {
-		t.Error("GET /api/user not 200")
-	}
+	r.GET("/api/user").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.Equal(t, http.StatusOK, r.Code)
+		})
 
-	w = httptest.NewRecorder()
-	r, _ = http.NewRequest("GET", "/api/user", nil)
-	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241aa")
-	handler.ServeHTTP(w, r)
-	if r.Response.StatusCode != 200 {
-		t.Error("GET /api/user not 200")
-	}
-	w = httptest.NewRecorder()
-	r, _ = http.NewRequest("POST", "/api/hongbao", nil)
-	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241aa")
-	r.Header.Add("money", "10")
-	r.Header.Add("num", "1")
-	handler.ServeHTTP(w, r)
-	if r.Response.StatusCode != 200 {
-		t.Error("POST /api/hongbao not 200")
-	}
-	w = httptest.NewRecorder()
-	r, _ = http.NewRequest("GET", "/api/hongbao/1", nil)
-	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241aa")
-	handler.ServeHTTP(w, r)
-	if r.Response.StatusCode != 200 {
-		t.Error("GET /api/hongbao not 200")
-	}
+	r.GET("/api/user").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241a35a",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.NotEqual(t, http.StatusOK, r.Code)
+		})
 
-	w = httptest.NewRecorder()
-	r, _ = http.NewRequest("GET", "/api/hongbao", nil)
-	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241aa")
-	handler.ServeHTTP(w, r)
-	if r.Response.StatusCode != 200 {
-		t.Error("GET /api/hongbao not 200")
-	}
+	r.POST("/api/hongbao").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241aa",
+			"money":     "10",
+			"num":       "1",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.Equal(t, http.StatusOK, r.Code)
+		})
+
+	r.GET("/api/hongbao/1").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241aa",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.Equal(t, http.StatusOK, r.Code)
+		})
+	r.GET("/api/hongbao").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241aa",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.Equal(t, http.StatusOK, r.Code)
+		})
 }
