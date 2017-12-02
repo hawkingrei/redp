@@ -45,7 +45,7 @@ func TestSimpleApi(t *testing.T) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
 	var password string
-	var hbid int
+	var hbid int64
 	r.POST("/api/hongbao").
 		SetDebug(true).
 		SetHeader(gofight.H{
