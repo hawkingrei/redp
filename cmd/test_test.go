@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"testing"
 
 	"github.com/WindomZ/testify/assert"
@@ -62,7 +63,7 @@ func TestSimpleApi(t *testing.T) {
 
 		})
 
-	r.GET("/api/hongbao/"+string(hbid)).
+	r.GET("/api/hongbao/"+strconv.FormatInt(hbid, 10)).
 		SetDebug(true).
 		SetHeader(gofight.H{
 			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
@@ -70,7 +71,7 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
-	r.GET("/api/hongbao/"+string(hbid)).
+	r.GET("/api/hongbao/"+strconv.FormatInt(hbid, 10)).
 		SetDebug(true).
 		SetHeader(gofight.H{
 			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
