@@ -22,6 +22,10 @@
 			"Rev": "75baa5975d3cbc68045c40d5a7f94d69c5c226a6"
 		},
 		{
+			"ImportPath": "github.com/buger/jsonparser",
+			"Rev": "5096fddd2cca678b0801ece8513a06e580981fd2"
+		},
+		{
 			"ImportPath": "github.com/davecgh/go-spew/spew",
 			"Comment": "v1.1.0-9-gecdeabc",
 			"Rev": "ecdeabc65495df2dec95d7c4a4c3e021903035e5"
