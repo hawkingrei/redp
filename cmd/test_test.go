@@ -12,7 +12,7 @@ func TestAllHeader(t *testing.T) {
 	var conf conf.Configure
 	conf.DbDriver = "mysql"
 	conf.DbURL = "root:@/redp?charset=utf8&parseTime=True&loc=Local"
-	store_ := CreateStote(conf)
+	store_ := CreateStote(&conf)
 	handler := CreateHttpHandler(store_, &conf)
 	w := httptest.NewRecorder()
 	r, _ := http.NewRequest("GET", "/api/version", nil)
