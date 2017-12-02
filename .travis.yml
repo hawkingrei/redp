@@ -1,6 +1,8 @@
 language: go
 go:
   - 1.9.x
+services:
+  - mysql
 install:
   - go get github.com/tools/godep
   - go get github.com/mattn/goveralls
