@@ -21,4 +21,8 @@ func TestAllHeader(t *testing.T) {
 	r, _ = http.NewRequest("GET", "/api/user", nil)
 	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241ae35a")
 	handler.ServeHTTP(w, r)
+	w = httptest.NewRecorder()
+	r, _ = http.NewRequest("GET", "/api/user", nil)
+	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241aa")
+	handler.ServeHTTP(w, r)
 }
