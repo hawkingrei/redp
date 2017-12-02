@@ -42,4 +42,7 @@ func TestSimpleApi(t *testing.T) {
 	r, _ = http.NewRequest("GET", "/api/hongbao", nil)
 	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241aa")
 	handler.ServeHTTP(w, r)
+	if r.Response.StatusCode != 200 {
+		t.Error("GET /api/hongbao not 200")
+	}
 }
