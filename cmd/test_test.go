@@ -72,7 +72,7 @@ func TestSimpleApi(t *testing.T) {
 			"Password":  password,
 		}).
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
-			assert.Equal(t, http.StatusOK, r.Code)
+			assert.Equal(t, http.StatusOK, r.Code, r.Body.String())
 		})
 	r.GET("/api/hongbao").
 		SetDebug(true).
