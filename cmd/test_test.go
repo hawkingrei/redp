@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"testing"
 
@@ -54,6 +55,7 @@ func TestSimpleApi(t *testing.T) {
 		}).
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.Equal(t, http.StatusOK, r.Code)
+			fmt.Println(r.Body.String())
 			data := []byte(r.Body.String())
 			password, _ = jsonparser.GetString(data, "Password")
 			hbid, _ = jsonparser.GetString(data, "Hbid")
