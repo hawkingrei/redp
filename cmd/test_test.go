@@ -69,7 +69,7 @@ func TestSimpleApi(t *testing.T) {
 		SetDebug(true).
 		SetHeader(gofight.H{
 			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
-			"password":  password,
+			"Password":  password,
 		}).
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.Equal(t, http.StatusOK, r.Code)
