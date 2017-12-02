@@ -8,7 +8,7 @@ import (
 	"github.com/hawkingrei/redp/conf"
 )
 
-func TestAllHeader(t *testing.T) {
+func TestSimpleApi(t *testing.T) {
 	var conf conf.Configure
 	conf.DbDriver = "mysql"
 	conf.DbURL = "root:@/redp?charset=utf8&parseTime=True&loc=Local"
@@ -38,4 +38,8 @@ func TestAllHeader(t *testing.T) {
 	r.Header.Add("num", "1")
 	handler.ServeHTTP(w, r)
 
+	w = httptest.NewRecorder()
+	r, _ = http.NewRequest("GET", "/api/hongbao", nil)
+	r.Header.Add("Signature", "wz:d0965c07d1a00fcc85d28b8a241aa")
+	handler.ServeHTTP(w, r)
 }
