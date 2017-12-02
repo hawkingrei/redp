@@ -54,7 +54,7 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.Equal(t, http.StatusOK, r.Code)
 			data := []byte(r.Body.String())
-			password, _ = jsonparser.GetString(data, "password")
+			password, _ = jsonparser.GetString(data, "Password")
 		})
 
 	r.GET("/api/hongbao/1").
@@ -72,7 +72,7 @@ func TestSimpleApi(t *testing.T) {
 			"password":  password,
 		}).
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
-			assert.NotEqual(t, http.StatusOK, r.Code)
+			assert.Equal(t, http.StatusOK, r.Code)
 		})
 	r.GET("/api/hongbao").
 		SetDebug(true).
