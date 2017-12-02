@@ -17,6 +17,7 @@ import (
 	"github.com/hawkingrei/redp/model"
 	"github.com/hawkingrei/redp/routers"
 	"github.com/hawkingrei/redp/routers/middleware"
+	"github.com/hawkingrei/redp/routers/middleware/header"
 	"github.com/hawkingrei/redp/store"
 	"github.com/hawkingrei/redp/store/datastore"
 	"github.com/sirupsen/logrus"
@@ -63,6 +64,7 @@ func CreateHttpHandler(store store.Store, config *conf.Configure) http.Handler {
 	handler := routers.Load(
 		ginrus.Ginrus(logrus.StandardLogger(), time.RFC3339, true),
 		middleware.Version,
+		header.NoCache,
 		middleware.Store(config, store),
 	)
 	return handler
