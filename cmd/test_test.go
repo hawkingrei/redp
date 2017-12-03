@@ -167,6 +167,6 @@ func TestSimpleApi(t *testing.T) {
 		})
 	time.Sleep(30)
 	for i := 0; i <= 10; i = i + 1 {
-		store_.Background(conf.HBtimeout)
+		store_.Background(1)
 	}
 }
