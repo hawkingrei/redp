@@ -61,6 +61,35 @@ func TestSimpleApi(t *testing.T) {
 		SetDebug(true).
 		SetHeader(gofight.H{
 			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
+			"money":     "1",
+			"num":       "0",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.NotEqual(t, http.StatusOK, r.Code)
+		})
+	r.POST("/api/hongbao").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
+			"money":     "0",
+			"num":       "1",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.NotEqual(t, http.StatusOK, r.Code)
+		})
+	r.POST("/api/hongbao").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
+			"money":     "1",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.NotEqual(t, http.StatusOK, r.Code)
+		})
+	r.POST("/api/hongbao").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
 			"money":     "10",
 			"num":       "1",
 		}).
