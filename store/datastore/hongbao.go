@@ -13,7 +13,7 @@ import (
 
 func randStringRunes(n int) string {
 	rand.Seed(time.Now().UnixNano())
-	var letterRunes = []rune("abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ")
+	var letterRunes = []rune("abcdefghijkmnopqrstuvwxyzABCDEFGHIJKLMNPQRSTUVWXYZ1234567890")
 	b := make([]rune, n)
 	for i := range b {
 		b[i] = letterRunes[rand.Intn(len(letterRunes))]
