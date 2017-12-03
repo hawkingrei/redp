@@ -177,3 +177,13 @@ func TestSimpleApi(t *testing.T) {
 	}
 	store_.Close()
 }
+
+func TestDatabase(t *testing.T) {
+	var conf conf.Configure
+	conf.DbDriver = "mysql"
+	conf.DbURL = "root:123123@/redp?charset=utf8&parseTime=True&loc=Local"
+	conf.Debug = true
+	conf.HBtimeout = 5
+	_, err := setupStore(&conf)
+	assert.NotEqual(t, nil, err)
+}
