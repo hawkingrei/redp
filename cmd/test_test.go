@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"strconv"
 	"testing"
+	"time"
 
 	"github.com/WindomZ/testify/assert"
 	"github.com/appleboy/gofight"
@@ -17,7 +18,7 @@ func TestSimpleApi(t *testing.T) {
 	conf.DbDriver = "mysql"
 	conf.DbURL = "root:@/redp?charset=utf8&parseTime=True&loc=Local"
 	conf.Debug = true
-	conf.HBtimeout = 9
+	conf.HBtimeout = 3
 	store_ := CreateStote(&conf)
 	handler := CreateHttpHandler(store_, &conf)
 
@@ -101,4 +102,6 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
+	time.Sleep(10)
+	store_.Background(conf.HBtimeout)
 }
