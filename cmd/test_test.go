@@ -169,4 +169,5 @@ func TestSimpleApi(t *testing.T) {
 	for i := 0; i <= 10; i = i + 1 {
 		store_.Background(1)
 	}
+	store_.Close()
 }
