@@ -152,7 +152,20 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
-	time.Sleep(10)
+	r.POST("/api/hongbao").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
+			"money":     "10",
+			"num":       "1",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.Equal(t, http.StatusOK, r.Code)
+			data := []byte(r.Body.String())
+			password, _ = jsonparser.GetString(data, "Password")
+			hbid, _ = jsonparser.GetInt(data, "Hbid")
+		})
+	time.Sleep(30)
 	for i := 0; i <= 10; i = i + 1 {
 		store_.Background(conf.HBtimeout)
 	}
