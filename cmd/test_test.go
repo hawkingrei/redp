@@ -250,6 +250,7 @@ func TestGrabHongbao1(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.Equal(t, http.StatusOK, r.Code)
 			data := []byte(r.Body.String())
+			fmt.Println(r.Body.String())
 			hasmoney, _ := jsonparser.GetFloat(data, "Money")
 			fmt.Println(hasmoney)
 			fmt.Println(gotmoney)
