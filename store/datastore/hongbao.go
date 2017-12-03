@@ -57,7 +57,7 @@ func (ds datastore) GrabHongbao(hid int64, username string, password string) (*m
 	if err == nil {
 		tx.Commit()
 		logrus.Debug("ds GrabHongbao username has got hongbao ")
-		return &ghd, err
+		return &ghd, errors.New("you have got hongbao")
 	}
 	err = tx.Where("hbid = ? And username = \"\"", hid).First(&ghd).Error
 	if err != nil {
