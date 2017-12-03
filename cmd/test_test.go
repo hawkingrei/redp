@@ -206,7 +206,7 @@ func TestGrabHongbao1(t *testing.T) {
 	r.POST("/api/hongbao").
 		SetDebug(true).
 		SetHeader(gofight.H{
-			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
+			"Signature": "a:0cc175b9c0f1b6a831c399e269772661",
 			"money":     "10",
 			"num":       "2",
 		}).
@@ -220,7 +220,7 @@ func TestGrabHongbao1(t *testing.T) {
 	r.GET("/api/hongbao/"+strconv.FormatInt(hbid, 10)).
 		SetDebug(true).
 		SetHeader(gofight.H{
-			"Signature": "wwz:e235ac07af7a969a52bec0985f6a9f85",
+			"Signature": "b:92eb5ffee6ae2fec3ad71c777531578f",
 			"Password":  password,
 		}).
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
@@ -245,7 +245,7 @@ func TestGrabHongbao1(t *testing.T) {
 	r.GET("/api/user").
 		SetDebug(true).
 		SetHeader(gofight.H{
-			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
+			"Signature": "a:0cc175b9c0f1b6a831c399e269772661",
 		}).
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.Equal(t, http.StatusOK, r.Code)
