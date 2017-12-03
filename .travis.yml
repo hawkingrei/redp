@@ -12,5 +12,4 @@ script:
   - make
 
 after_success:
-  - make test
   - $HOME/gopath/bin/goveralls -repotoken lvzhxLUsIPqFXYim1uxSdxSnRyG4gh8sr
