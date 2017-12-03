@@ -17,7 +17,7 @@ func TestSimpleApi(t *testing.T) {
 	conf.DbDriver = "mysql"
 	conf.DbURL = "root:@/redp?charset=utf8&parseTime=True&loc=Local"
 	conf.Debug = true
-	conf.HBtimeout = 3
+	conf.HBtimeout = 5
 	store_ := CreateStote(&conf)
 	handler := CreateHttpHandler(store_, &conf)
 
