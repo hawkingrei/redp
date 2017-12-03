@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 	"testing"
@@ -226,6 +227,7 @@ func TestGrabHongbao1(t *testing.T) {
 			assert.Equal(t, http.StatusOK, r.Code, r.Body.String())
 			data := []byte(r.Body.String())
 			gotmoney, _ = jsonparser.GetFloat(data, "Money")
+
 		})
 	time.Sleep(5 * time.Second)
 	store_.Background(1)
@@ -249,6 +251,7 @@ func TestGrabHongbao1(t *testing.T) {
 			assert.Equal(t, http.StatusOK, r.Code)
 			data := []byte(r.Body.String())
 			hasmoney, _ := jsonparser.GetFloat(data, "Money")
+			fmt.Println(hasmoney + "+" + gotmoney)
 			assert.Equal(t, float64(10), hasmoney+gotmoney)
 		})
 	store_.Close()
