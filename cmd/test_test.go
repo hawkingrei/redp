@@ -165,7 +165,7 @@ func TestSimpleApi(t *testing.T) {
 			password, _ = jsonparser.GetString(data, "Password")
 			hbid, _ = jsonparser.GetInt(data, "Hbid")
 		})
-	time.Sleep(30)
+	time.Sleep(3 * time.Second)
 	for i := 0; i <= 10; i = i + 1 {
 		store_.Background(1)
 	}
