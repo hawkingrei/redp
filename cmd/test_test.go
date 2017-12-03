@@ -62,7 +62,14 @@ func TestSimpleApi(t *testing.T) {
 			hbid, _ = jsonparser.GetInt(data, "Hbid")
 
 		})
-
+	r.GET("/api/hongbao/"+strconv.FormatInt(hbid, 10)).
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wwz:e235ac07af7a969a52bec0985f6a9f85",
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.NotEqual(t, http.StatusOK, r.Code)
+		})
 	r.GET("/api/hongbao/"+strconv.FormatInt(hbid, 10)).
 		SetDebug(true).
 		SetHeader(gofight.H{
