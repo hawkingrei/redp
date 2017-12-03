@@ -2,7 +2,6 @@ package datastore
 
 import (
 	"errors"
-	"fmt"
 	"math/rand"
 	"time"
 
@@ -131,7 +130,6 @@ func (ds datastore) Background(timeout int) {
 				logrus.Error("ds got  closed gothongbaos faiil. ", err.Error())
 				break
 			}
-			fmt.Println(ungothongbao)
 			for _, v := range ungothongbao {
 				user.Money = user.Money + v.Money
 			}

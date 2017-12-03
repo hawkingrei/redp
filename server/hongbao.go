@@ -1,7 +1,6 @@
 package server
 
 import (
-	"fmt"
 	"strconv"
 
 	"github.com/gin-gonic/gin"
@@ -49,7 +48,6 @@ func GrabHongbao(c *gin.Context) {
 	username, _ := c.Get("user")
 	pid := c.Param("pid")
 	hid, err := strconv.ParseInt(pid, 10, 64)
-	fmt.Println(hid)
 	if err != nil {
 		c.JSON(500, "HTTP parm pid is mistake")
 		return
