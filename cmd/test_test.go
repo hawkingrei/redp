@@ -242,7 +242,7 @@ func TestGrabHongbao1(t *testing.T) {
 			assert.NotEqual(t, http.StatusOK, r.Code, r.Body.String())
 		})
 	r = gofight.New()
-	r.GET("/api/hongbao").
+	r.GET("/api/user").
 		SetDebug(true).
 		SetHeader(gofight.H{
 			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
