@@ -44,5 +44,10 @@ curl http://127.0.0.1:9000/api/hongbao --header "Signature:wz:d0965c07d1a00fcc85
 [{"Gothbid":21,"Hbid":3,"Username":"wz","Money":2.15},{"Gothbid":22,"Hbid":3,"Username":"wz","Money":0.87},{"Gothbid":23,"Hbid":3,"Username":"wz","Money":0.87}]%
 ```
 
+## Version 
 
+```shell
+curl http://ec2-13-229-95-84.ap-southeast-1.compute.amazonaws.com:9000/api/version
 
+{"version":"d7400ef"}%
+```
