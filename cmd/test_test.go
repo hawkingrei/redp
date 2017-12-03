@@ -117,6 +117,16 @@ func TestSimpleApi(t *testing.T) {
 			assert.Equal(t, http.StatusOK, r.Code)
 		})
 	r = gofight.New()
+	r.GET("/api/hongbao/1000").
+		SetDebug(true).
+		SetHeader(gofight.H{
+			"Signature": "wz:d0965c07d1a00fcc85d28b8a241ae35a",
+			"Password":  password,
+		}).
+		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
+			assert.NotEqual(t, http.StatusOK, r.Code)
+		})
+	r = gofight.New()
 	r.GET("/api/hongbao/"+strconv.FormatInt(hbid, 10)).
 		SetDebug(true).
 		SetHeader(gofight.H{
