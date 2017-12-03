@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 	"testing"
@@ -57,7 +56,6 @@ func TestSimpleApi(t *testing.T) {
 		}).
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.Equal(t, http.StatusOK, r.Code)
-			fmt.Println(r.Body.String())
 			data := []byte(r.Body.String())
 			password, _ = jsonparser.GetString(data, "Password")
 			hbid, _ = jsonparser.GetInt(data, "Hbid")
@@ -103,5 +101,7 @@ func TestSimpleApi(t *testing.T) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
 	time.Sleep(10)
-	store_.Background(conf.HBtimeout)
+	for i := 0; i <= 10; i = i + 1 {
+		store_.Background(conf.HBtimeout)
+	}
 }
