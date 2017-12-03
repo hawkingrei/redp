@@ -12,4 +12,4 @@ script:
   - make
 
 after_success:
-  - $HOME/gopath/bin/goveralls -repotoken lvzhxLUsIPqFXYim1uxSdxSnRyG4gh8sr
+  - $HOME/gopath/bin/goveralls -v -repotoken lvzhxLUsIPqFXYim1uxSdxSnRyG4gh8sr
