@@ -27,7 +27,7 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.Equal(t, http.StatusOK, r.Code)
 		})
-
+	r = gofight.New()
 	r.GET("/api/user").
 		SetDebug(true).
 		SetHeader(gofight.H{
@@ -36,7 +36,7 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.Equal(t, http.StatusOK, r.Code)
 		})
-
+	r = gofight.New()
 	r.GET("/api/user").
 		SetDebug(true).
 		SetHeader(gofight.H{
@@ -47,6 +47,7 @@ func TestSimpleApi(t *testing.T) {
 		})
 	var password string
 	var hbid int64
+	r = gofight.New()
 	r.POST("/api/hongbao").
 		SetDebug(true).
 		SetHeader(gofight.H{
@@ -57,6 +58,7 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
+	r = gofight.New()
 	r.POST("/api/hongbao").
 		SetDebug(true).
 		SetHeader(gofight.H{
@@ -66,6 +68,7 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
+	r = gofight.New()
 	r.POST("/api/hongbao").
 		SetDebug(true).
 		SetHeader(gofight.H{
@@ -76,6 +79,7 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
+	r = gofight.New()
 	r.POST("/api/hongbao").
 		SetDebug(true).
 		SetHeader(gofight.H{
@@ -85,6 +89,7 @@ func TestSimpleApi(t *testing.T) {
 		Run(handler, func(r gofight.HTTPResponse, rq gofight.HTTPRequest) {
 			assert.NotEqual(t, http.StatusOK, r.Code)
 		})
+	r = gofight.New()
 	r.POST("/api/hongbao").
 		SetDebug(true).
 		SetHeader(gofight.H{
@@ -98,6 +103,7 @@ func TestSimpleApi(t *testing.T) {
 			password, _ = jsonparser.GetString(data, "Password")
 			hbid, _ = jsonparser.GetInt(data, "Hbid")
 		})
+	r = gofight.New()
 	r.GET("/api/hongbao/"+strconv.FormatInt(hbid, 10)).
 		SetDebug(true).
 		SetHeader(gofight.H{
