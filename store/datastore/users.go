@@ -12,7 +12,7 @@ func (ds datastore) GetUser(username string) (*model.User, error) {
 }
 
 func (ds datastore) CreateUser(username string) {
-	user := model.User{Username: username, Memory: 0}
+	user := model.User{Username: username, Money: 0}
 	logrus.Debug("ds create user ", user)
 	ds.Db.Create(&user)
 }

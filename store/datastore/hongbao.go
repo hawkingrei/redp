@@ -79,7 +79,7 @@ func (ds datastore) GrabHongbao(hid int64, username string, password string) (*m
 		logrus.Debug("ds GrabHongbao get account ", err.Error())
 		return &ghd, err
 	}
-	myaccount.Memory = myaccount.Memory + ghd.Money
+	myaccount.Money = myaccount.Money + ghd.Money
 	err = tx.Save(&myaccount).Error
 	if err != nil {
 		tx.Rollback()
@@ -133,7 +133,7 @@ func (ds datastore) Background(timeout int) {
 			}
 			fmt.Println(ungothongbao)
 			for _, v := range ungothongbao {
-				user.Memory = user.Memory + v.Money
+				user.Money = user.Money + v.Money
 			}
 			err = tx.Where("hbid = ? and username = \"\"", v.Hbid).Delete(&model.GotHongbao{}).Error
 			if err != nil {
