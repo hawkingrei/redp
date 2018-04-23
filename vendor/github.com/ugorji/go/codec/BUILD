@@ -1,0 +1,46 @@
+package(default_visibility = ["//visibility:public"])
+
+load(
+    "@io_bazel_rules_go//go:def.bzl",
+    "go_library",
+)
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "0doc.go",
+        "binc.go",
+        "cbor.go",
+        "decode.go",
+        "encode.go",
+        "fast-path.generated.go",
+        "gen-helper.generated.go",
+        "goversion_arrayof_gte_go15.go",
+        "goversion_makemap_lt_go19.go",
+        "goversion_unexportedembeddedptr_lt_go110.go",
+        "goversion_vendor_gte_go17.go",
+        "helper.go",
+        "helper_internal.go",
+        "helper_unsafe.go",
+        "json.go",
+        "msgpack.go",
+        "rpc.go",
+        "simple.go",
+        "time.go",
+    ],
+    tags = ["automanaged"],
+)
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [":package-srcs"],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)
