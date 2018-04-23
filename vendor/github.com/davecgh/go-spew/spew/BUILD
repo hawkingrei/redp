@@ -16,6 +16,8 @@ go_library(
         "format.go",
         "spew.go",
     ],
+    importmap = "vendor/github.com/davecgh/go-spew/spew",
+    importpath = "github.com/davecgh/go-spew/spew",
     tags = ["automanaged"],
 )
 

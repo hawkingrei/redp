@@ -34,6 +34,8 @@ go_library(
         "search.go",
         "utils.go",
     ],
+    importmap = "vendor/github.com/jinzhu/gorm",
+    importpath = "github.com/jinzhu/gorm",
     tags = ["automanaged"],
     deps = ["//vendor/github.com/jinzhu/inflection:go_default_library"],
 )

@@ -8,6 +8,8 @@ load(
 go_library(
     name = "go_default_library",
     srcs = ["ginrus.go"],
+    importmap = "vendor/github.com/gin-gonic/contrib/ginrus",
+    importpath = "github.com/gin-gonic/contrib/ginrus",
     tags = ["automanaged"],
     deps = [
         "//vendor/github.com/gin-gonic/gin:go_default_library",

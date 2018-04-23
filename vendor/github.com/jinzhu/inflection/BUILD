@@ -8,6 +8,8 @@ load(
 go_library(
     name = "go_default_library",
     srcs = ["inflections.go"],
+    importmap = "vendor/github.com/jinzhu/inflection",
+    importpath = "github.com/jinzhu/inflection",
     tags = ["automanaged"],
 )
 

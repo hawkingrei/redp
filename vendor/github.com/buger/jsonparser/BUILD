@@ -13,6 +13,8 @@ go_library(
         "escape.go",
         "parser.go",
     ],
+    importmap = "vendor/github.com/buger/jsonparser",
+    importpath = "github.com/buger/jsonparser",
     tags = ["automanaged"],
 )
 

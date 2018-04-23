@@ -13,11 +13,14 @@ go_library(
         "doc.go",
         "encode.go",
         "encoding_types.go",
+        "encoding_types_1.1.go",
         "lex.go",
         "parse.go",
         "type_check.go",
         "type_fields.go",
     ],
+    importmap = "vendor/github.com/BurntSushi/toml",
+    importpath = "github.com/BurntSushi/toml",
     tags = ["automanaged"],
 )
 

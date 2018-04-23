@@ -20,6 +20,8 @@ go_library(
         "text.go",
         "text_parser.go",
     ],
+    importmap = "vendor/github.com/golang/protobuf/proto",
+    importpath = "github.com/golang/protobuf/proto",
     tags = ["automanaged"],
 )
 

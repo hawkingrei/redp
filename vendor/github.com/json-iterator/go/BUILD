@@ -47,6 +47,8 @@ go_library(
         "feature_stream_string.go",
         "jsoniter.go",
     ],
+    importmap = "vendor/github.com/json-iterator/go",
+    importpath = "github.com/json-iterator/go",
     tags = ["automanaged"],
 )
 

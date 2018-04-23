@@ -15,6 +15,8 @@ go_library(
         "util.go",
         "validator.go",
     ],
+    importmap = "vendor/gopkg.in/go-playground/validator.v8",
+    importpath = "gopkg.in/go-playground/validator.v8",
     tags = ["automanaged"],
 )
 

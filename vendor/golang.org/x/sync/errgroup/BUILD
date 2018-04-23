@@ -8,6 +8,8 @@ load(
 go_library(
     name = "go_default_library",
     srcs = ["errgroup.go"],
+    importmap = "vendor/golang.org/x/sync/errgroup",
+    importpath = "golang.org/x/sync/errgroup",
     tags = ["automanaged"],
     deps = ["//vendor/golang.org/x/net/context:go_default_library"],
 )

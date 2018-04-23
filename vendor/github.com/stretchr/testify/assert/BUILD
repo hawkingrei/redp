@@ -16,6 +16,8 @@ go_library(
         "forward_assertions.go",
         "http_assertions.go",
     ],
+    importmap = "vendor/github.com/stretchr/testify/assert",
+    importpath = "github.com/stretchr/testify/assert",
     tags = ["automanaged"],
     deps = [
         "//vendor/github.com/davecgh/go-spew/spew:go_default_library",

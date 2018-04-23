@@ -18,6 +18,8 @@ go_library(
         "xml.go",
         "yaml.go",
     ],
+    importmap = "vendor/github.com/gin-gonic/gin/render",
+    importpath = "github.com/gin-gonic/gin/render",
     tags = ["automanaged"],
     deps = [
         "//vendor/github.com/gin-gonic/gin/json:go_default_library",

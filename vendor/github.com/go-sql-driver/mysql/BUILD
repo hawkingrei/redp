@@ -24,8 +24,11 @@ go_library(
         "statement.go",
         "transaction.go",
         "utils.go",
+        "utils_go17.go",
         "utils_go18.go",
     ],
+    importmap = "vendor/github.com/go-sql-driver/mysql",
+    importpath = "github.com/go-sql-driver/mysql",
     tags = ["automanaged"],
 )
 

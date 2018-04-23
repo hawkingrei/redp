@@ -8,6 +8,8 @@ load(
 go_library(
     name = "go_default_library",
     srcs = ["json.go"],
+    importmap = "vendor/github.com/gin-gonic/gin/json",
+    importpath = "github.com/gin-gonic/gin/json",
     tags = ["automanaged"],
 )
 

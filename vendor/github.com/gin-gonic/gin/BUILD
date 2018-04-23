@@ -26,6 +26,8 @@ go_library(
         "tree.go",
         "utils.go",
     ],
+    importmap = "vendor/github.com/gin-gonic/gin",
+    importpath = "github.com/gin-gonic/gin",
     tags = ["automanaged"],
     deps = [
         "//vendor/github.com/gin-contrib/sse:go_default_library",

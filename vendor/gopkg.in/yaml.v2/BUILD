@@ -22,6 +22,8 @@ go_library(
         "yamlh.go",
         "yamlprivateh.go",
     ],
+    importmap = "vendor/gopkg.in/yaml.v2",
+    importpath = "gopkg.in/yaml.v2",
     tags = ["automanaged"],
 )
 

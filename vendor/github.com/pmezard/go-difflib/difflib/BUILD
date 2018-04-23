@@ -8,6 +8,8 @@ load(
 go_library(
     name = "go_default_library",
     srcs = ["difflib.go"],
+    importmap = "vendor/github.com/pmezard/go-difflib/difflib",
+    importpath = "github.com/pmezard/go-difflib/difflib",
     tags = ["automanaged"],
 )
 

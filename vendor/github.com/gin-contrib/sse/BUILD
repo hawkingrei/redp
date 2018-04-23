@@ -12,6 +12,8 @@ go_library(
         "sse-encoder.go",
         "writer.go",
     ],
+    importmap = "vendor/github.com/gin-contrib/sse",
+    importpath = "github.com/gin-contrib/sse",
     tags = ["automanaged"],
 )
 

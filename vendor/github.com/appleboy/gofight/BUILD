@@ -8,6 +8,8 @@ load(
 go_library(
     name = "go_default_library",
     srcs = ["gofight.go"],
+    importmap = "vendor/github.com/appleboy/gofight",
+    importpath = "github.com/appleboy/gofight",
     tags = ["automanaged"],
     deps = ["//vendor/github.com/stretchr/testify/assert:go_default_library"],
 )
