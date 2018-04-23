@@ -24,7 +24,7 @@ BIN_DIR := $(OUT_DIR)/bin
 
 .PHONY: build update clean
 
-build: check bazel-build
+build: bazel-build
 
 simple-build:
 	bazel build --watchfs -- //tools/... -//vendor/...
@@ -40,9 +40,8 @@ build-keep-going:
 	bazel build --watchfs -k -- //...
 clean:
 	bazel clean --expunge
-export GOPATH := $(PWD)/../..
 update:
-	./hack/update-bazel.sh
+	kazel
 test:
 	@if [ "$(WHAT)" !=  "" ]; \
          then \

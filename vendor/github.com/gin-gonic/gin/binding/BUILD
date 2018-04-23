@@ -21,9 +21,9 @@ go_library(
     tags = ["automanaged"],
     deps = [
         "//vendor/github.com/gin-gonic/gin/json:go_default_library",
-        "//vendor/github.com/golang/protobuf/proto:go_default_library",
         "//vendor/github.com/ugorji/go/codec:go_default_library",
         "//vendor/gopkg.in/go-playground/validator.v8:go_default_library",
+        "@com_github_golang_protobuf//proto:go_default_library",
     ],
 )
 
