@@ -1,0 +1,10 @@
+{
+	"GoPrefix": "github.com/hawkingrei/redp",
+	"SkippedPaths": [
+    		"^release",
+    		"^//release"
+  	],
+	"AddSourcesRules": true,
+	"VendorMultipleBuildFiles": true,
+	"ManageGoRules": true
+}

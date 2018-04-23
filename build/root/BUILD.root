@@ -1,0 +1,36 @@
+# gazelle:prefix go-common
+
+package(default_visibility = ["//visibility:public"])
+
+load(
+    "@io_bazel_rules_go//go:def.bzl",
+    "go_prefix",
+)
+
+go_prefix("github.com/hawkingrei/veda")
+
+filegroup(
+    name = "package-srcs",
+    srcs = glob(["**"], exclude=["bazel-*/**", ".git/**"]),
+    tags = ["automanaged"],
+    visibility = ["//visibility:private"],
+)
+
+filegroup(
+    name = "all-srcs",
+    srcs = [
+        ":package-srcs",
+        "//build:all-srcs",
+        "//cmd:all-srcs",
+        "//conf:all-srcs",
+        "//internal/hongbao:all-srcs",
+        "//internal/version:all-srcs",
+        "//model:all-srcs",
+        "//routers:all-srcs",
+        "//server:all-srcs",
+        "//store:all-srcs",
+        "//vendor:all-srcs",
+    ],
+    tags = ["automanaged"],
+    visibility = ["//visibility:public"],
+)

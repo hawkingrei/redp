@@ -1,0 +1,41 @@
+http_archive(
+    name = "io_bazel_rules_go",
+    url = "https://github.com/bazelbuild/rules_go/releases/download/0.10.3/rules_go-0.10.3.tar.gz",
+    sha256 = "feba3278c13cde8d67e341a837f69a029f698d7a27ddbb2a202be7a10b22142a",
+)
+
+git_repository(
+    name = "bazel_skylib",
+    remote = "https://github.com/bazelbuild/bazel-skylib.git",
+    tag = "0.3.0",  # change this to use a different release
+)
+
+load("@bazel_skylib//:lib.bzl", "versions")
+
+versions.check(minimum_bazel_version = "0.11.0")
+
+load("@io_bazel_rules_go//go:def.bzl", "go_rules_dependencies", "go_register_toolchains", "go_download_sdk","go_repository")
+load("@io_bazel_rules_go//proto:def.bzl", "proto_register_toolchains")
+
+go_register_toolchains(go_version="1.10.1")
+
+go_repository(
+    name = "com_google_cloud_go",
+    commit = "7808a7bf89ab1b3b840e00435c5404af438ec24d",
+    importpath = "cloud.google.com/go",
+    remote = "https://github.com/GoogleCloudPlatform/google-cloud-go.git",
+    vcs = "git",
+)
+ 
+go_repository(
+    name = "org_golang_x_oauth2",
+    remote = "https://github.com/golang/oauth2.git",
+    vcs = "git",
+    commit = "fdc9e635145ae97e6c2cb777c48305600cf515cb",
+    importpath = "golang.org/x/oauth2",
+)
+
+
+go_rules_dependencies()
+go_register_toolchains()
+
