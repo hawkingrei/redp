@@ -66,3 +66,5 @@ init:
 	go get google.golang.org/grpc
 	go get github.com/golang/oauth2
 	go get cloud.google.com/go
+raw-test:
+	go test -v ./...
