@@ -8,7 +8,7 @@ image:
   registry: 110563292790.dkr.ecr.ap-southeast-1.amazonaws.com
   repository: redp
   tag: latest
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 
 ## Configuration values for the mysql dependency
 ## ref: https://github.com/kubernetes/charts/blob/master/stable/mysql/README.md
