@@ -10,9 +10,21 @@ image:
   tag: latest
   pullPolicy: IfNotPresent
 
-mysqlUser: travis
-mysqlPassword:
-mysqlDatabase: redp
+## Configuration values for the mysql dependency
+## ref: https://github.com/kubernetes/charts/blob/master/stable/mysql/README.md
+##
+mysql:
+  # Enable to deploy the mySQL chart
+  enabled: true
+  # To use an external mySQL instance, set enabled to false and uncomment
+  # the line below:
+  # mysqlServer: ""
+  mysqlUser: "travis"
+  mysqlPassword: "af3b0810a8b28144dcf1bb185de86da7b6e5dcba"
+  mysqlDatabase: "redp"
+  # Specify the TCP port that mySQL should use
+  service:
+    port: 3306
 
 service:
   type: ClusterIP
