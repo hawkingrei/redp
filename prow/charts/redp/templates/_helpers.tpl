@@ -30,3 +30,13 @@ Create chart name and version as used by the chart label.
 {{- define "redp.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" -}}
 {{- end -}}
+
+{{- define "mysql.hostname" -}}
+{{- if eq .Values.database.type "mysql" -}}
+{{- if .Values.mysql.enabled -}}
+{{- printf "%s-%s" .Release.Name "mysql" | trunc 63 | trimSuffix "-" -}}
+{{- else -}}
+{{- printf "%s" .Values.mysql.mysqlServer -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
