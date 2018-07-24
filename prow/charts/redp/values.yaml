@@ -26,10 +26,6 @@ mysql:
   service:
     port: 3306
 
-service:
-  type: ClusterIP
-  port: 80
-
 ingress:
   enabled: false
   annotations: {}
