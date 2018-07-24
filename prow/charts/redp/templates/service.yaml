@@ -7,8 +7,3 @@ metadata:
     chart: {{ template "redp.chart" . }}
     release: {{ .Release.Name }}
     heritage: {{ .Release.Service }}
-spec:
-  type: {{ .Values.service.type }}
-  selector:
-    app: {{ template "redp.name" . }}
-    release: {{ .Release.Name }}
