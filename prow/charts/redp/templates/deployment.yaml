@@ -27,7 +27,7 @@ spec:
           args: ["test", "-v","./..."]
           env:
           - name: MYSQL_HOST
-            value: {{ .Release.Name }}-mysql
+            value: {{ template "mysql.hostname" . }}
           - name: MYSQL_USERNAME
             value: {{ .Values.mysql.mysqlUser | quote }}
           - name: MYSQL_PASSWORD
