@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 	"strconv"
 	"testing"
 	"time"
@@ -16,7 +17,12 @@ import (
 func TestSimpleApi(t *testing.T) {
 	var conf conf.Configure
 	conf.DbDriver = "mysql"
-	conf.DbURL = "root:@/redp?charset=utf8&parseTime=True&loc=Local"
+	if host, port, username, passport := os.Getenv("MYSQL_HOST"), os.Getenv("MYSQL_PORT"), os.Getenv("MYSQL_USERNAME"), os.Getenv("MYSQL_PASSPORT"); host != "" && port != "" {
+		conf.DbDriver = username + ":" + host + ":" + port + "@" + passport + "/redp?charset=utf8&parseTime=True&loc=Local"
+	} else {
+		conf.DbURL = "root:@/redp?charset=utf8&parseTime=True&loc=Local"
+	}
+
 	conf.Debug = true
 	conf.HBtimeout = 5
 	store_ := CreateStote(&conf)
