@@ -17,7 +17,7 @@ import (
 func TestSimpleApi(t *testing.T) {
 	var conf conf.Configure
 	conf.DbDriver = "mysql"
-	if host, port, username, passport := os.Getenv("MYSQL_HOST"), os.Getenv("MYSQL_PORT"), os.Getenv("MYSQL_USERNAME"), os.Getenv("MYSQL_PASSPORT"); host != "" && port != "" {
+	if host, port, username, passport := os.Getenv("MYSQL_HOST"), os.Getenv("MYSQL_PORT"), os.Getenv("MYSQL_USERNAME"), os.Getenv("MYSQL_PASSWORD"); host != "" && port != "" {
 		conf.DbURL = username + ":" + passport + "@tcp(" + host + ":" + port + ")/redp?charset=utf8&parseTime=True&loc=Local"
 	} else {
 		conf.DbURL = "root:@/redp?charset=utf8&parseTime=True&loc=Local"
