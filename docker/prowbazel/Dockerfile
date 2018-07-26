@@ -13,12 +13,12 @@ RUN rm -rf /var/lib/apt/lists/* \
 RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 # Installing
-ADD scripts /tmp/istio_tmp/scripts
-RUN chmod +x /tmp/istio_tmp/scripts/linux-install-software
-RUN /tmp/istio_tmp/scripts/linux-install-software \
-    && rm -rf /tmp/istio_tmp
+# ADD scripts /tmp/istio_tmp/scripts
+# RUN chmod +x /tmp/istio_tmp/scripts/linux-install-software
+# RUN /tmp/istio_tmp/scripts/linux-install-software \
+#    && rm -rf /tmp/istio_tmp
 
-ENV PATH /usr/local/go/bin:/opt/go/bin:${PATH}
+# ENV PATH /usr/local/go/bin:/opt/go/bin:${PATH}
 
 # Create bootstrap user
 ENV HOME /home/bootstrap
@@ -31,7 +31,7 @@ WORKDIR ${HOME}
 ENV TEST_TMPDIR /home/bootstrap/.cache/bazel
 
 # Add bootstrap, the test harness (checks out code, captures log and status)
-ADD https://raw.githubusercontent.com/nlandolfi/test-infra-1/d7900388fa1fb69738e231a21230373fd4b5ede9/jenkins/bootstrap.py ${HOME}
+ADD https://raw.githubusercontent.com/hawkingrei/redp/master/docker/prowbazel/entrypoint ${HOME}
 RUN sudo chmod +rx ${HOME}/bootstrap.py
 
 # Add entrypoint that runs bootstrap with appropriate arguments
